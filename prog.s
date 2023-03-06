@@ -1,40 +1,29 @@
 	.file	"prog.c"
 	.text
-	.section	.rodata
+	.section	.rodata.str1.1,"aMS",@progbits,1
 .LC0:
 	.string	"%d"
-	.text
+	.section	.text.startup,"ax",@progbits
+	.p2align 4
 	.globl	main
 	.type	main, @function
 main:
-.LFB0:
+.LFB23:
 	.cfi_startproc
 	endbr64
-	pushq	%rbp
+	subq	$8, %rsp
 	.cfi_def_cfa_offset 16
-	.cfi_offset 6, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register 6
-	subq	$16, %rsp
-	movl	$10, -12(%rbp)
-	movl	$-50, -8(%rbp)
-	movl	$100, -4(%rbp)
-	movl	-12(%rbp), %edx
-	movl	-8(%rbp), %eax
-	addl	%eax, %edx
-	movl	-4(%rbp), %eax
-	addl	%edx, %eax
-	movl	%eax, %esi
-	leaq	.LC0(%rip), %rax
-	movq	%rax, %rdi
-	movl	$0, %eax
-	call	printf@PLT
-	movl	$0, %eax
-	leave
-	.cfi_def_cfa 7, 8
+	movl	$60, %edx
+	movl	$1, %edi
+	xorl	%eax, %eax
+	leaq	.LC0(%rip), %rsi
+	call	__printf_chk@PLT
+	xorl	%eax, %eax
+	addq	$8, %rsp
+	.cfi_def_cfa_offset 8
 	ret
 	.cfi_endproc
-.LFE0:
+.LFE23:
 	.size	main, .-main
 	.ident	"GCC: (Ubuntu 11.3.0-1ubuntu1~22.04) 11.3.0"
 	.section	.note.GNU-stack,"",@progbits
